@@ -1,0 +1,61 @@
+table tb_cli
+	lineageTag: 0426fd23-3acc-4c0b-9c51-ab420106b596
+
+	column ID
+		dataType: string
+		lineageTag: 9edcd302-ffd2-4717-9e64-53e803d80e48
+		summarizeBy: none
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOME
+		dataType: string
+		lineageTag: 5432c98d-087e-49ac-b66f-17fb464822db
+		summarizeBy: none
+		sourceColumn: NOME
+
+		annotation SummarizationSetBy = Automatic
+
+	column CARGO
+		dataType: string
+		lineageTag: 20b25f6b-b0c7-4fea-a532-ecd70a2cc608
+		summarizeBy: none
+		sourceColumn: CARGO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALARIO
+		dataType: double
+		lineageTag: 7a9f919f-96fd-4f7e-94e9-395c8dad06b5
+		summarizeBy: none
+		sourceColumn: SALARIO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CIDADE
+		dataType: string
+		lineageTag: 0148d7b3-46f8-4cbd-a480-48bbfaed85e9
+		summarizeBy: none
+		sourceColumn: CIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tb_cli = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\thiag\OneDrive\Ambiente de Trabalho\Power BI\Modulo 1\Novo_Material_2025\Materiais_Power_BI_Analytics\2_MODULO  - POWER_BI - Essentials\2_LOCAOÇÃO DE VEICULOS\CLIENTES.xlsx"), null, true),
+				    Planilha1_Sheet = Fonte{[Item="Planilha1",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha1_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"ID", Int64.Type}, {"NOME", type text}, {"CARGO", type text}, {"SALARIO", Int64.Type}, {"CIDADE", type text}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"ID", type text}, {"SALARIO", type number}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

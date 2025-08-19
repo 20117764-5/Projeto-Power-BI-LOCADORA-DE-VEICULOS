@@ -1,0 +1,158 @@
+table 'INNER JOIN'
+	lineageTag: b64bd8a4-9347-46a8-abf0-af0af523cf5f
+
+	column ID_CLIENTE
+		dataType: string
+		lineageTag: a71a3b2e-e8a0-44ee-987e-fe766efafd3b
+		summarizeBy: none
+		sourceColumn: ID_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MARCA
+		dataType: string
+		lineageTag: 80618562-3567-4fa7-af38-710b2fe9c6b5
+		summarizeBy: none
+		sourceColumn: MARCA
+
+		annotation SummarizationSetBy = Automatic
+
+	column MODELO
+		dataType: string
+		lineageTag: 8831cd70-40a5-40b2-b2d7-f7e55be72cb8
+		summarizeBy: none
+		sourceColumn: MODELO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLACA
+		dataType: string
+		lineageTag: 35e62e9b-6de2-4367-a09c-da8bfce4d5b1
+		summarizeBy: none
+		sourceColumn: PLACA
+
+		annotation SummarizationSetBy = Automatic
+
+	column KILOMETRO_PERCORRIDO
+		dataType: double
+		lineageTag: e0b5a5e1-43fd-43b3-9909-447763dcc5f0
+		summarizeBy: sum
+		sourceColumn: KILOMETRO_PERCORRIDO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DATA
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 36961d15-5d76-454c-b1e9-4f3005d0eb12
+		summarizeBy: none
+		sourceColumn: DATA
+
+		variation Variation
+			isDefault
+			relationship: d9185d1b-74c2-4a27-ad2f-b7fe0a52b869
+			defaultHierarchy: LocalDateTable_bd829229-90de-4fd2-a112-cac72aa36c21.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'VALOR POR KM'
+		dataType: double
+		lineageTag: 1bb667de-a6e1-40b6-a5ce-97d545abb4ac
+		summarizeBy: sum
+		sourceColumn: VALOR POR KM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SITUAÇÃO CADASTRAL'
+		dataType: string
+		lineageTag: deca0ba6-4442-4f2d-9e53-a45cd458529f
+		summarizeBy: none
+		sourceColumn: SITUAÇÃO CADASTRAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column ANO
+		dataType: string
+		lineageTag: 60608c12-478a-419b-98c2-995fdf045f58
+		summarizeBy: none
+		sourceColumn: ANO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MÊS
+		dataType: string
+		lineageTag: 40316551-d10b-455a-a2e2-fbc722794ff0
+		summarizeBy: none
+		sourceColumn: MÊS
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIA
+		dataType: string
+		lineageTag: 2637a92e-4c6e-4234-aa9a-28033eda97d9
+		summarizeBy: none
+		sourceColumn: DIA
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FAT MEDIDA'
+		dataType: double
+		lineageTag: 3af4cb93-1d01-4489-b0b3-891f27fefc2a
+		summarizeBy: sum
+		sourceColumn: FAT MEDIDA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NomeDoDia
+		dataType: string
+		lineageTag: 1538b6be-3c70-4260-bee3-85ffc6cf3734
+		summarizeBy: none
+		sourceColumn: NomeDoDia
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tb_cli.ID'
+		dataType: string
+		lineageTag: 5920dc3c-aa21-4e57-bd1a-87200a42f2d5
+		summarizeBy: none
+		sourceColumn: tb_cli.ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tb_cli.NOME'
+		dataType: string
+		lineageTag: c78e76de-ef66-444b-8534-0cade3dceb0b
+		summarizeBy: none
+		sourceColumn: tb_cli.NOME
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tb_cli.CIDADE'
+		dataType: string
+		lineageTag: e029821e-003f-4478-a685-4a787e3a2d87
+		summarizeBy: none
+		sourceColumn: tb_cli.CIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'INNER JOIN' = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.NestedJoin(tb_km, {"ID_CLIENTE"}, tb_cli, {"ID"}, "tb_cli", JoinKind.Inner),
+				    #"tb_cli Expandido" = Table.ExpandTableColumn(Fonte, "tb_cli", {"ID", "NOME", "CIDADE"}, {"tb_cli.ID", "tb_cli.NOME", "tb_cli.CIDADE"})
+				in
+				    #"tb_cli Expandido"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

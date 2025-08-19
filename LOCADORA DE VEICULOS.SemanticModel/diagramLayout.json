@@ -1,0 +1,99 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 91,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "tb_km",
+          "nodeLineageTag": "eb2d0320-f7d8-48c4-9b66-eba6d71cc0f7",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 336,
+            "y": 51
+          },
+          "nodeIndex": "tb_cli",
+          "nodeLineageTag": "0426fd23-3acc-4c0b-9c51-ab420106b596",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 620,
+            "y": 98
+          },
+          "nodeIndex": "MEDIDAS",
+          "nodeLineageTag": "c0e0ede5-8e0a-4306-9354-06c8dc8be18d",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 904,
+            "y": 0
+          },
+          "nodeIndex": "INNER JOIN",
+          "nodeLineageTag": "b64bd8a4-9347-46a8-abf0-af0af523cf5f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1188,
+            "y": 0
+          },
+          "nodeIndex": "LEFT JOIN",
+          "nodeLineageTag": "1e8dc9b0-b167-407c-a7b6-35cc55c3966d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1472,
+            "y": 0
+          },
+          "nodeIndex": "LEFT ANTI",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

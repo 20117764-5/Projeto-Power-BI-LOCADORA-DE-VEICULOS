@@ -1,0 +1,54 @@
+relationship 5e21b2e0-5c6e-41d8-a6dd-960531a20cc7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: tb_km.DATA
+	toColumn: LocalDateTable_f9c695ec-2f8a-4822-9c37-90889dbc3f47.Date
+
+relationship 2a08b567-9541-cf7a-412f-15fa485e5958
+	fromColumn: tb_km.ID_CLIENTE
+	toColumn: tb_cli.ID
+
+relationship d9185d1b-74c2-4a27-ad2f-b7fe0a52b869
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'INNER JOIN'.DATA
+	toColumn: LocalDateTable_bd829229-90de-4fd2-a112-cac72aa36c21.Date
+
+relationship AutoDetected_2e5ae416-3952-4ee1-868d-b5dd357f75f0
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'INNER JOIN'.ID_CLIENTE
+	toColumn: tb_cli.ID
+
+relationship AutoDetected_99c819a7-c7ec-487f-875d-23e51d321eae
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'INNER JOIN'.PLACA
+	toColumn: tb_km.PLACA
+
+relationship 0c282499-7498-4862-96fc-c0ad695019f9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'LEFT JOIN'.DATA
+	toColumn: LocalDateTable_24904d83-f970-45a9-a0b3-31861db1c1ae.Date
+
+relationship AutoDetected_5d40a1ba-22dd-4a39-a9ff-b98e389f7838
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: tb_km.ID_CLIENTE
+	toColumn: 'LEFT JOIN'.ID_CLIENTE
+
+relationship AutoDetected_5da4bee5-d032-4103-8f90-ee81f65bbf3d
+	isActive: false
+	fromColumn: 'LEFT JOIN'.'tb_cli.ID'
+	toColumn: 'INNER JOIN'.'tb_cli.ID'
+
+relationship ca7cde24-a3f5-4d1c-be12-b1dc6cceb0df
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'LEFT ANTI'.DATA
+	toColumn: LocalDateTable_9dc9cfb1-2c5a-4295-be96-fbab44b678ea.Date
+
+relationship AutoDetected_ee56c751-8039-493b-a157-97d9a2b7dda6
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'LEFT ANTI'.PLACA
+	toColumn: tb_km.PLACA
+

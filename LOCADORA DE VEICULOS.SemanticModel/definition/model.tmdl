@@ -1,0 +1,30 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["tb_km","tb_cli","MEDIDAS","INNER JOIN","LEFT JOIN","LEFT ANTI"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1577.0 (25.02)+00af0910c5ca19a229c472b0dfc17a2c488f6b0a
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table tb_km
+ref table DateTableTemplate_4465a8fd-2425-4f6d-bc3e-bc637c9bbdc5
+ref table LocalDateTable_f9c695ec-2f8a-4822-9c37-90889dbc3f47
+ref table tb_cli
+ref table MEDIDAS
+ref table 'INNER JOIN'
+ref table LocalDateTable_bd829229-90de-4fd2-a112-cac72aa36c21
+ref table 'LEFT JOIN'
+ref table LocalDateTable_24904d83-f970-45a9-a0b3-31861db1c1ae
+ref table 'LEFT ANTI'
+ref table LocalDateTable_9dc9cfb1-2c5a-4295-be96-fbab44b678ea
+
+ref cultureInfo pt-BR
+

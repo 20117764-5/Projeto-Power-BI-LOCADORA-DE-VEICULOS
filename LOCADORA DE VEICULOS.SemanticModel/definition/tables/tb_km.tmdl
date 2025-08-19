@@ -1,0 +1,218 @@
+table tb_km
+	lineageTag: eb2d0320-f7d8-48c4-9b66-eba6d71cc0f7
+
+	column ID_CLIENTE
+		dataType: string
+		lineageTag: b17af29a-4f2a-4412-8b08-f0a5c4edd5de
+		summarizeBy: none
+		sourceColumn: ID_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLACA
+		dataType: string
+		lineageTag: 13895b7f-c3d8-4bf2-9f7c-6fbdddb7bfca
+		summarizeBy: none
+		sourceColumn: PLACA
+
+		annotation SummarizationSetBy = Automatic
+
+	column KILOMETRO_PERCORRIDO
+		dataType: double
+		lineageTag: ad32dd55-d371-411a-b8fb-7e11cbc213fa
+		summarizeBy: sum
+		sourceColumn: KILOMETRO_PERCORRIDO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DATA
+		dataType: dateTime
+		formatString: dd/mm/yy
+		lineageTag: f44dc55f-c8bf-47c8-8897-0c572ebbdfa3
+		summarizeBy: none
+		sourceColumn: DATA
+
+		variation Variation
+			isDefault
+			relationship: 5e21b2e0-5c6e-41d8-a6dd-960531a20cc7
+			defaultHierarchy: LocalDateTable_f9c695ec-2f8a-4822-9c37-90889dbc3f47.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'VALOR POR KM'
+		dataType: double
+		lineageTag: d9128c50-b987-4b3d-89e5-b4fb1b522ddb
+		summarizeBy: sum
+		sourceColumn: VALOR POR KM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SITUAÇÃO CADASTRAL'
+		dataType: string
+		lineageTag: 5fc02c58-bdbe-46bd-a8e8-5a011eed9dd3
+		summarizeBy: none
+		sourceColumn: SITUAÇÃO CADASTRAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column ANO
+		dataType: string
+		lineageTag: 47bd3b15-02a8-47aa-ac6b-b62c2fc47bbc
+		summarizeBy: none
+		sourceColumn: ANO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MÊS
+		dataType: string
+		lineageTag: 432fd54a-0773-46c3-9303-27d112d9e5e3
+		summarizeBy: none
+		sourceColumn: MÊS
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIA
+		dataType: string
+		lineageTag: 31d2b461-c79d-49f8-8aa0-83d5b4f2128b
+		summarizeBy: none
+		sourceColumn: DIA
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FAT MEDIDA'
+		dataType: double
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: b840d642-8b5f-4f96-b6f5-9f9043babbc1
+		summarizeBy: sum
+		sourceColumn: FAT MEDIDA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column MARCA
+		dataType: string
+		lineageTag: bfe59e3a-ef30-48c4-814e-81b5669a2d47
+		summarizeBy: none
+		sourceColumn: MARCA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"tb_km","TableItemName":"CATEGORIAS","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column MODELO
+		dataType: string
+		lineageTag: c9a16b55-fa16-461f-8d82-1770432d8ff0
+		summarizeBy: none
+		sourceColumn: MODELO
+
+		annotation SummarizationSetBy = Automatic
+
+	column NomeDoDia
+		dataType: string
+		lineageTag: b2dd1220-8c11-4454-a587-46cc4c22bb3d
+		summarizeBy: none
+		sourceColumn: NomeDoDia
+
+		annotation SummarizationSetBy = Automatic
+
+	column ICONE = IF(tb_km[SITUAÇÃO CADASTRAL] = "ATIVO", 1, 2)
+		formatString: 0
+		lineageTag: 42fdc5a4-8596-40b3-924e-138c7f8eb52b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column CATEGORIAS =
+			SWITCH(
+				TRUE,
+				ISBLANK('tb_km'[MARCA]),
+				"(Em branco)",
+				'tb_km'[MARCA] IN {"CHEVROLET",
+					"FIAT",
+					"FORD",
+					"RENAULT",
+					"VOLKSWAGEN"},
+				"CATEGORIA LITE",
+				'tb_km'[MARCA] IN {"KIA",
+					"LAND_ROVER",
+					"TOYOTA"},
+				"CATEGORIA LUXO",
+				'tb_km'[MARCA] IN {"MARCA NÃO REGISTRADA"},
+				"MARCA NÃO REGISTRADA",
+				'tb_km'[MARCA]
+			)
+		lineageTag: ba21205e-e65e-4f45-9644-9791b0251add
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "tb_km"
+				          }
+				        },
+				        "Property": "MARCA"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"t","Entity":"tb_km"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"t"}},"Property":"MARCA"}}],"GroupItems":[{"DisplayName":"(Em branco)","BlankDefaultPlaceholder":true},{"DisplayName":"CATEGORIA LITE","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"t"}},"Property":"MARCA"}}],"Values":[[{"Literal":{"Value":"'CHEVROLET'"}}],[{"Literal":{"Value":"'FIAT'"}}],[{"Literal":{"Value":"'FORD'"}}],[{"Literal":{"Value":"'RENAULT'"}}],[{"Literal":{"Value":"'VOLKSWAGEN'"}}]]}}},{"DisplayName":"CATEGORIA LUXO","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"t"}},"Property":"MARCA"}}],"Values":[[{"Literal":{"Value":"'KIA'"}}],[{"Literal":{"Value":"'LAND_ROVER'"}}],[{"Literal":{"Value":"'TOYOTA'"}}]]}}},{"DisplayName":"MARCA NÃO REGISTRADA","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"t"}},"Property":"MARCA"}}],"Values":[[{"Literal":{"Value":"'MARCA NÃO REGISTRADA'"}}]]}}}]}
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tb_km = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\thiag\OneDrive\Ambiente de Trabalho\Power BI\Modulo 1\Novo_Material_2025\Materiais_Power_BI_Analytics\2_MODULO  - POWER_BI - Essentials\2_LOCAOÇÃO DE VEICULOS\LOCAÇÃO DE VEICULOS.xlsx"), null, true),
+				    tb_km_Table = Fonte{[Item="tb_km",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(tb_km_Table,{{"ID_CLIENTE", Int64.Type}, {"MARCA", type text}, {"MODELO", type text}, {"PLACA", type text}, {"KILOMETRO_PERCORRIDO", type text}, {"ANO", type date}, {"VALOR POR KM", type any}, {"SITUAÇÃO CADASTRAL", type any}, {"extract_jupiter_Date", type any}, {"extract_erro", type text}, {"extract_type", type text}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"KILOMETRO_PERCORRIDO", type number}}),
+				    #"Erros Removidos" = Table.RemoveRowsWithErrors(#"Tipo Alterado1", {"KILOMETRO_PERCORRIDO"}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Erros Removidos",{{"VALOR POR KM", type number}, {"SITUAÇÃO CADASTRAL", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado2",{"extract_jupiter_Date", "extract_erro", "extract_type"}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Colunas Removidas",{{"ANO", "DATA"}}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Colunas Renomeadas", "ANO", each [DATA]),
+				    #"Ano Extraído" = Table.TransformColumns(#"Personalização Adicionada",{{"ANO", Date.Year, Int64.Type}}),
+				    #"Personalização Adicionada1" = Table.AddColumn(#"Ano Extraído", "MÊS", each [DATA]),
+				    #"Nome do Mês Extraído" = Table.TransformColumns(#"Personalização Adicionada1", {{"MÊS", each Date.MonthName(_), type text}}),
+				    #"Personalização Adicionada2" = Table.AddColumn(#"Nome do Mês Extraído", "DIA", each [DATA]),
+				    #"Nome do Dia Extraído" = Table.TransformColumns(#"Personalização Adicionada2", {{"DIA", each Date.DayOfWeekName(_), type text}}),
+				    #"Personalização Adicionada3" = Table.AddColumn(#"Nome do Dia Extraído", "FAT MEDIDA", each [KILOMETRO_PERCORRIDO] * [VALOR POR KM]),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Personalização Adicionada3",{{"FAT MEDIDA", type number}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado3","1","ATIVO",Replacer.ReplaceText,{"SITUAÇÃO CADASTRAL"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","0","INATIVO",Replacer.ReplaceText,{"SITUAÇÃO CADASTRAL"}),
+				    #"Texto Aparado" = Table.TransformColumns(#"Valor Substituído1",{{"MARCA", Text.Trim, type text}}),
+				    #"Texto Limpo" = Table.TransformColumns(#"Texto Aparado",{{"MARCA", Text.Clean, type text}}),
+				    #"Dividir Coluna por Delimitador" = Table.SplitColumn(#"Texto Limpo", "MARCA", Splitter.SplitTextByEachDelimiter({" "}, QuoteStyle.Csv, false), {"MARCA.1", "MARCA.2"}),
+				    #"Tipo Alterado4" = Table.TransformColumnTypes(#"Dividir Coluna por Delimitador",{{"MARCA.1", type text}, {"MARCA.2", type text}}),
+				    #"Colunas Removidas1" = Table.RemoveColumns(#"Tipo Alterado4",{"MODELO"}),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Colunas Removidas1",{{"MARCA.2", "MODELO"}, {"MARCA.1", "MARCA"}}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Colunas Renomeadas1","MARCA","MARCA NÃO REGISTRADA",Replacer.ReplaceText,{"MARCA"}),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Valor Substituído2","NÃO REGISTRADA","MODELO NÃO REGISTRADO",Replacer.ReplaceText,{"MODELO"}),
+				    #"Personalização Adicionada4" = Table.AddColumn(#"Valor Substituído3", "nomedodia", each Date.ToText( [Data], "ddd", "pt-BR" )),
+				    #"Colunas Removidas2" = Table.RemoveColumns(#"Personalização Adicionada4",{"nomedodia"}),
+				    #"Personalização Adicionada5" = Table.AddColumn(#"Colunas Removidas2", "Personalizar", each Date.ToText( [DATA], "dddd")),
+				    #"Colunas Renomeadas2" = Table.RenameColumns(#"Personalização Adicionada5",{{"Personalizar", "NomeDoDia"}}),
+				    #"Tipo Alterado5" = Table.TransformColumnTypes(#"Colunas Renomeadas2",{{"ANO", type text}, {"ID_CLIENTE", type text}})
+				in
+				    #"Tipo Alterado5"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
