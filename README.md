@@ -43,8 +43,15 @@ Este projeto consiste em um dashboard desenvolvido no Power BI para a análise d
 ## Contribuições
 Contribuições são bem-vindas! Por favor, envie um pull request ou abra uma issue para sugestões e melhorias.
 
-## Licença
-Este projeto é de uso interno da Yto Car e não possui licença pública. Para uso externo, entre em contato com o responsável pelo projeto.
+## 👨‍💻 Autor
 
-## Contato
-Para dúvidas ou suporte, entre em contato com a equipe de TI da Yto Car.
+**Thiago Vinícius**  
+📧 [thiagovfb.developer@gmail.com](mailto:thiagovfb.developer@gmail.com)  
+📱 +55 (81) 9 8366-9631  
+
+---
+
+## 📜 Licença
+
+Este projeto é de uso demonstrativo.  
+Sinta-se à vontade para utilizá-lo como inspiração em seus próprios dashboards.
